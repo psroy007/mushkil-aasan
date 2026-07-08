@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mushkil Aasan - Your Trusted Home & Professional Services</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <style>
+        :root {
+            --primary: #0f4c81;
+            --primary-dark: #0a3356;
+            --secondary: #ff6f61;
+            --accent: #ffb100;
+            --text-dark: #2d3748;
+            --text-light: #718096;
+            --bg-light: #f7fafc;
+            --white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            color: var(--text-dark);
+            background-color: var(--bg-light);
+            line-height: 1.6;
+        }
+
+        /* Top Utility Bar */
+        .top-bar {
+            background-color: var(--primary-dark);
+            color: var(--white);
+            padding: 8px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 14px;
+            flex-wrap: wrap;
+        }
+
+        .top-bar a {
+            color: var(--white);
+            text-decoration: none;
+            margin-left: 15px;
+            transition: color 0.3s;
+        }
+
+        .top-bar a:hover {
+            color: var(--secondary);
+        }
+
+        /* Main Navigation */
+        header {
+            background-color: var(--white);
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo span {
+            color: var(--secondary);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 600;
+            transition: color 0.3s;
+            cursor: pointer;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--primary);
+        }
+
+        .nav-links a.active {
+            border-bottom: 2px solid var(--primary);
+            padding-bottom: 4px;
+        }
+
+        .cta-btn {
+            background-color: var(--secondary);
+            color: var(--white) !important;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: background 0.3s !important;
+        }
+
+        .cta-btn:hover {
+            background-color: #e05447 !important;
+        }
+
+        /* Page Container Architecture */
+        .page-content {
+            display: none;
+            animation: fadeIn 0.4s ease-in-out forwards;
+            min-height: 70vh;
+        }
+
+        .page-content.active-page {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(15, 76, 129, 0.85), rgba(10, 51, 86, 0.9)), url('https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+            color: var(--white);
+            padding: 100px 5% 120px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            font-weight: 800;
+        }
+
+        .hero p {
+            font-size: 20px;
+            margin-bottom: 40px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            opacity: 0.9;
+        }
+
+        .search-container {
+            background: var(--white);
+            padding: 10px;
+            border-radius: 50px;
+            display: flex;
+            max-width: 600px;
+            margin: 0 auto;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        .search-container input {
+            flex: 1;
+            border: none;
+            padding: 15px 25px;
+            font-size: 16px;
+            outline: none;
+            border-radius: 50px;
+        }
+
+        .search-container button {
+            background-color: var(--primary);
+            color: var(--white);
+            border: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        /* Category Framework Home */
+        .section-title {
+            text-align: center;
+            margin: 60px 0 40px;
+            font-size: 32px;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .section-title::after {
+            content: '';
+            width: 60px;
+            height: 4px;
+            background-color: var(--secondary);
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .grid-categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            padding: 0 5%;
+            max-width: 1400px;
+            margin: 0 auto 80px;
+        }
+
+        .category-card {
+            background: var(--white);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+
+        .category-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .category-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+
+        .category-body {
+            padding: 20px;
+        }
+
+        .category-body h3 {
+            margin-bottom: 10px;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .category-body ul {
+            list-style: none;
+            color: var(--text-light);
+            font-size: 14px;
+        }
+
+        .category-body ul li {
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .category-body ul li::before {
+            content: '•';
+            color: var(--secondary);
+            font-weight: bold;
+        }
+
+        /* Services Grid Layout Page */
+        .services-header {
+            background-color: var(--primary);
+            color: var(--white);
+            padding: 60px 5%;
+            text-align: center;
+        }
+
+        .services-container {
+            max-width: 1400px;
+            margin: 40px auto;
+            padding: 0 5%;
+        }
+
+        .service-block {
+            margin-bottom: 60px;
+            background: var(--white);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .service-block h2 {
+            color: var(--primary);
+            border-bottom: 2px solid #edf2f7;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .items-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 20px;
+        }
+
+        .item-tag {
+            background: var(--bg-light);
+            padding: 12px 15px;
+            border-radius: 8px;
+            font-weight: 500;
+            border-left: 4px solid var(--secondary);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .book-tag-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            cursor: pointer;
+        }
+
+        /* About & Contact Styles */
+        .about-section, .contact-section {
+            max-width: 1000px;
+            margin: 60px auto;
+            padding: 0 5%;
+        }
+
+        .info-box-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .info-box {
+            background: var(--white);
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+
+        .info-box i {
+            font-size: 40px;
+            color: var(--secondary);
+            margin-bottom: 15px;
+        }
+
+        /* Interactive Booking Form */
+        .booking-card {
+            background: var(--white);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            max-width: 600px;
+            margin: 40px auto;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #cbd5e0;
+            border-radius: 6px;
+            outline: none;
+            font-size: 16px;
+        }
+
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            border-color: var(--primary);
+        }
+
+        .submit-btn {
+            background-color: var(--primary);
+            color: var(--white);
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 6px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .submit-btn:hover {
+            background-color: var(--primary-dark);
+        }
+
+        /* Features / Why Choose Us */
+        .features-bg {
+            background-color: var(--primary-dark);
+            color: var(--white);
+            padding: 60px 5%;
+            margin-top: 60px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 30px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .feature-item {
+            text-align: center;
+        }
+
+        .feature-item i {
+            font-size: 36px;
+            color: var(--accent);
+            margin-bottom: 15px;
+        }
+
+        /* Footer Frame */
+        footer {
+            background-color: #1a202c;
+            color: #a0aec0;
+            padding: 60px 5% 30px;
+            margin-top: auto;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .footer-col h3 {
+            color: var(--white);
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-col ul li a {
+            color: #a0aec0;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--white);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #2d3748;
+            font-size: 14px;
+        }
+
+        /* Alert Notification Box */
+        .notification {
+            position: fixed;
+            bottom: 20px;
+            right: -400px;
+            background: #48bb78;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            transition: right 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 600;
+        }
+
+        .notification.show {
+            right: 20px;
+        }
+
+        /* Responsive Breakpoints */
+        @media (max-width: 768px) {
+            .navbar { flex-direction: column; gap: 15px; text-align: center; }
+            .nav-links { flex-wrap: wrap; justify-content: center; gap: 15px; }
+            .hero h1 { font-size: 32px; }
+            .hero p { font-size: 16px; }
+            .top-bar { flex-direction: column; gap: 10px; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Top Utility Bar -->
+    <div class="top-bar">
+        <div><i class="fas fa-check-circle"></i> Complete Verified Household & Digital Services Solution</div>
+        <div>
+            <a href="tel:7439365752"><i class="fas fa-phone"></i> +91 7439365752</a>
+            <a href="mailto:purabsingharoy90@gmail.com"><i class="fas fa-envelope"></i> purabsingharoy90@gmail.com</a>
+        </div>
+    </div>
+
+    <!-- Header & Navigation -->
+    <header>
+        <nav class="navbar">
+            <a class="logo" onclick="navigateTo('home')">
+                <i class="fas fa-toolbox"></i> Mushkil <span>Aasan</span>
+            </a>
+            <ul class="nav-links">
+                <li><a id="link-home" class="active" onclick="navigateTo('home')">Home</a></li>
+                <li><a id="link-services" onclick="navigateTo('services')">All Services</a></li>
+                <li><a id="link-about" onclick="navigateTo('about')">About Us</a></li>
+                <li><a id="link-contact" onclick="navigateTo('contact')">Contact Us</a></li>
+                <li><a id="link-book" class="cta-btn" onclick="navigateTo('book')">Book Now</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- SUCCESS NOTIFICATION BOX -->
+    <div id="toast-notification" class="notification">
+        <i class="fas fa-check-circle"></i> <span id="toast-text">Action successful!</span>
+    </div>
+
+    <!-- ================= HOME PAGE ================= -->
+    <div id="page-home" class="page-content active-page">
+        <section class="hero">
+            <h1>Koi Bhi Mushkil? Ab Sab Aasan!</h1>
+            <p>From plumbing repairs and professional home cleaning to trusted academic tutoring and hassle-free digital application assistance. Expert assistance brought directly to your doorstep.</p>
+            <div class="search-container">
+                <input type="text" placeholder="What service are you looking for today?">
+                <button type="button" onclick="navigateTo('services')">Search</button>
+            </div>
+        </section>
+
+        <h2 class="section-title">Explore Core Service Domains</h2>
+        <div class="grid-categories">
+            <!-- Card 1 -->
+            <div class="category-card" onclick="navigateTo('services')">
+                <img src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=400&q=80" alt="Home Maintenance">
+                <div class="category-body">
+                    <h3>🏠 Repair & Maintenance</h3>
+                    <ul>
+                        <li>Electricians & Plumbers</li>
+                        <li>Carpentry & Painting</li>
+                        <li>Welding & Fabrication</li>
+                    </ul>
+                </div>
+            </div>
+            <!-- Card 2 -->
+            <div class="category-card" onclick="navigateTo('services')">
+                <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=400&q=80" alt="Cleaning">
+                <div class="category-body">
+                    <h3>🧹 Deep Cleaning</h3>
+                    <ul>
+                        <li>Full Home Deep Cleaning</li>
+                        <li>Sofa & Carpet Wash</li>
+                        <li>Water Tank & Commercial</li>
+                    </ul>
+                </div>
+            </div>
+            <!-- Card 3 -->
+            <div class="category-card" onclick="navigateTo('services')">
+                <img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=400&q=80" alt="Education">
+                <div class="category-body">
+                    <h3>🎓 Academic Tutors</h3>
+                    <ul>
+                        <li>Home Tutors (All Subjects)</li>
+                        <li>Spoken English Classes</li>
+                        <li>Art, Music & Dance Tutors</li>
+                    </ul>
+                </div>
+            </div>
+            <!-- Card 4 -->
+            <div class="category-card" onclick="navigateTo('services')">
+                <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=400&q=80" alt="Digital Services">
+                <div class="category-body">
+                    <h3>💻 Digital & Online Desk</h3>
+                    <ul>
+                        <li>Govt Registration & Schemes</li>
+                        <li>Passport & PAN Assistance</li>
+                        <li>Resume & Ticket Booking</li>
+                    </ul>
+                </div>
+            </div>
+            <!-- Card 5 -->
+            <div class="category-card" onclick="navigateTo('services')">
+                <img src="https://images.unsplash.com/photo-1579208575657-c595a05383b7?auto=format&fit=crop&w=400&q=80" alt="Domestic Help">
+                <div class="category-body">
+                    <h3>👨‍🍳 Domestic Help</h3>
+                    <ul>
+                        <li>Cooks (Rannar Mashi)</li>
+                        <li>Maids (Kajer Mashi)</li>
+                        <li>Babysitters & Elderly Care</li>
+                    </ul>
+                </div>
+            </div>
+            <!-- Card 6 -->
+            <div class="category-card" onclick="navigateTo('services')">
+                <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=400&q=80" alt="Specialist Services">
+                <div class="category-body">
+                    <h3>🌟 Premium & Custom</h3>
+                    <ul>
+                        <li>Annual Maintenance Packages</li>
+                        <li>Emergency 24x7 Support</li>
+                        <li>Senior Citizen Assistance</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <section class="features-bg">
+            <div class="features-grid">
+                <div class="feature-item">
+                    <i class="fas fa-user-shield"></i>
+                    <h3>Verified Experts</h3>
+                    <p>Every provider is fully vetted and skilled for safety.</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-headset"></i>
+                    <h3>24/7 Priority Support</h3>
+                    <p>Dedicated assistance whenever you encounter structural issues.</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-tags"></i>
+                    <h3>Flat transparent Pricing</h3>
+                    <p>No hidden charges, competitive upfront service rates.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- ================= SERVICES CATALOGUE PAGE ================= -->
+    <div id="page-services" class="page-content">
+        <div class="services-header">
+            <h1>Comprehensive Service Ecosystem</h1>
+            <p>Select any expert service below to instantly prompt booking setup.</p>
+        </div>
+
+        <div class="services-container">
+            <!-- Section 1 -->
+            <div class="service-block">
+                <h2>🏠 Home Maintenance & Structural Repair</h2>
+                <div class="items-grid">
+                    <div class="item-tag">Electrician Services <button class="book-tag-btn" onclick="quickBook('Electrician Services')">Book</button></div>
+                    <div class="item-tag">Plumbing Services <button class="book-tag-btn" onclick="quickBook('Plumbing Services')">Book</button></div>
+                    <div class="item-tag">Painting / Colour Mistri <button class="book-tag-btn" onclick="quickBook('Painting')">Book</button></div>
+                    <div class="item-tag">Window Installation <button class="book-tag-btn" onclick="quickBook('Window Services')">Book</button></div>
+                    <div class="item-tag">Door & Lock Fitting <button class="book-tag-btn" onclick="quickBook('Door Services')">Book</button></div>
+                    <div class="item-tag">Glass Fitting & Repair <button class="book-tag-btn" onclick="quickBook('Glass Fitting')">Book</button></div>
+                    <div class="item-tag">Welding & Fabrication <button class="book-tag-btn" onclick="quickBook('Welding')">Book</button></div>
+                    <div class="item-tag">Carpentry Services <button class="book-tag-btn" onclick="quickBook('Carpentry')">Book</button></div>
+                    <div class="item-tag">Modular Kitchen Setup <button class="book-tag-btn" onclick="quickBook('Modular Furniture')">Book</button></div>
+                    <div class="item-tag">False Ceiling Design <button class="book-tag-btn" onclick="quickBook('False Ceiling')">Book</button></div>
+                    <div class="item-tag">Waterproofing Systems <button class="book-tag-btn" onclick="quickBook('Waterproofing')">Book</button></div>
+                </div>
+            </div>
+
+            <!-- Section 2 -->
+            <div class="service-block">
+                <h2>❄️ Appliance Installation & Servicing</h2>
+                <div class="items-grid">
+                    <div class="item-tag">AC Service & Repair <button class="book-tag-btn" onclick="quickBook('AC Service')">Book</button></div>
+                    <div class="item-tag">Refrigerator Mechanics <button class="book-tag-btn" onclick="quickBook('Refrigerator Repair')">Book</button></div>
+                    <div class="item-tag">Washing Machine Fix <button class="book-tag-btn" onclick="quickBook('Washing Machine Repair')">Book</button></div>
+                    <div class="item-tag">Microwave Repair <button class="book-tag-btn" onclick="quickBook('Microwave Repair')">Book</button></div>
+                    <div class="item-tag">Geyser Maintenance <button class="book-tag-btn" onclick="quickBook('Geyser Repair')">Book</button></div>
+                    <div class="item-tag">Water Purifier (RO) <button class="book-tag-btn" onclick="quickBook('RO Service')">Book</button></div>
+                    <div class="item-tag">TV Panel Installation <button class="book-tag-btn" onclick="quickBook('TV Installation')">Book</button></div>
+                    <div class="item-tag">Chimney Deep Cleaning <button class="book-tag-btn" onclick="quickBook('Chimney Cleaning')">Book</button></div>
+                </div>
+            </div>
+
+            <!-- Section 3 -->
+            <div class="service-block">
+                <h2>🧹 Cleaning & Sanitization</h2>
+                <div class="items-grid">
+                    <div class="item-tag">Full Deep Home Cleaning <button class="book-tag-btn" onclick="quickBook('Deep Home Cleaning')">Book</button></div>
+                    <div class="item-tag">Kitchen Sanitization <button class="book-tag-btn" onclick="quickBook('Kitchen Cleaning')">Book</button></div>
+                    <div class="item-tag">Bathroom Scrubbing <button class="book-tag-btn" onclick="quickBook('Bathroom Cleaning')">Book</button></div>
+                    <div class="item-tag">Sofa & Fabric Wash <button class="book-tag-btn" onclick="quickBook('Sofa Cleaning')">Book</button></div>
+                    <div class="item-tag">Water Tank Flushing <button class="book-tag-btn" onclick="quickBook('Water Tank Cleaning')">Book</button></div>
+                    <div class="item-tag">Post-Construction Scrub <button class="book-tag-btn" onclick="quickBook('Post-Construction Cleaning')">Book</button></div>
+                </div>
+            </div>
+
+            <!-- Section 4 -->
+            <div class="service-block">
+                <h2>👨‍🍳 Domestic Support Staff</h2>
+                <div class="items-grid">
+                    <div class="item-tag">Maid Service (Kajer Mashi) <button class="book-tag-btn" onclick="quickBook('Kajer Mashi')">Book</button></div>
+                    <div class="item-tag">Expert Cook (Rannar Mashi) <button class="book-tag-btn" onclick="quickBook('Rannar Mashi')">Book</button></div>
+                    <div class="item-tag">Babysitters / Nannies <button class="book-tag-btn" onclick="quickBook('Babysitter')">Book</button></div>
+                    <div class="item-tag">Elderly Patient Care <button class="book-tag-btn" onclick="quickBook('Elderly Care')">Book</button></div>
+                    <div class="item-tag">Live-in Household Help <button class="book-tag-btn" onclick="quickBook('Live-in Help')">Book</button></div>
+                </div>
+            </div>
+
+            <!-- Section 5 -->
+            <div class="service-block">
+                <h2>🎓 Education & Specialized Tutors</h2>
+                <div class="items-grid">
+                    <div class="item-tag">Academic Home Tutor <button class="book-tag-btn" onclick="quickBook('Home Tutor')">Book</button></div>
+                    <div class="item-tag">Online Fast-Track Tutor <button class="book-tag-btn" onclick="quickBook('Online Tutor')">Book</button></div>
+                    <div class="item-tag">Spoken English Training <button class="book-tag-btn" onclick="quickBook('Spoken English')">Book</button></div>
+                    <div class="item-tag">Computer Basics Coach <button class="book-tag-btn" onclick="quickBook('Computer Tutor')">Book</button></div>
+                    <div class="item-tag">Music & Instruments <button class="book-tag-btn" onclick="quickBook('Music Tutor')">Book</button></div>
+                    <div class="item-tag">Fine Arts & Drawing <button class="book-tag-btn" onclick="quickBook('Drawing Tutor')">Book</button></div>
+                    <div class="item-tag">Competitive Exam Preparation <button class="book-tag-btn" onclick="quickBook('Competitive Exams')">Book</button></div>
+                </div>
+            </div>
+
+            <!-- Section 6 -->
+            <div class="service-block">
+                <h2>💻 Digital Desk & Document Support</h2>
+                <div class="items-grid">
+                    <div class="item-tag">Online Registration Assistance <button class="book-tag-btn" onclick="quickBook('Online Registrations')">Book</button></div>
+                    <div class="item-tag">Govt Scheme Registrations <button class="book-tag-btn" onclick="quickBook('Govt Schemes')">Book</button></div>
+                    <div class="item-tag">Scholarship Form Processing <button class="book-tag-btn" onclick="quickBook('Scholarships')">Book</button></div>
+                    <div class="item-tag">Identity Document Help <button class="book-tag-btn" onclick="quickBook('ID Updates')">Book</button></div>
+                    <div class="item-tag">PAN Card Requests <button class="book-tag-btn" onclick="quickBook('PAN Card Services')">Book</button></div>
+                    <div class="item-tag">Passport Application Desk <button class="book-tag-btn" onclick="quickBook('Passport Assistance')">Book</button></div>
+                    <div class="item-tag">Travel Ticket Booking <button class="book-tag-btn" onclick="quickBook('Ticket Booking')">Book</button></div>
+                    <div class="item-tag">Resume & CV Layouts <button class="book-tag-btn" onclick="quickBook('Resume Prep')">Book</button></div>
+                </div>
+            </div>
+
+            <!-- Section 7 -->
+            <div class="service-block">
+                <h2>🚗 Outdoor, Security & Logistics</h2>
+                <div class="items-grid">
+                    <div class="item-tag">Pest Control Injections <button class="book-tag-btn" onclick="quickBook('Pest Control')">Book</button></div>
+                    <div class="item-tag">Packers & Movers Help <button class="book-tag-btn" onclick="quickBook('Packers Movers')">Book</button></div>
+                    <div class="item-tag">CCTV Integration Setup <button class="book-tag-btn" onclick="quickBook('CCTV Installation')">Book</button></div>
+                    <div class="item-tag">Drivers on Demand <button class="book-tag-btn" onclick="quickBook('Driver Hire')">Book</button></div>
+                    <div class="item-tag">Mason (Raj Mistri) Work <button class="book-tag-btn" onclick="quickBook('Mason Work')">Book</button></div>
+                    <div class="item-tag">Tile & Marble Fitting <button class="book-tag-btn" onclick="quickBook('Tile Fitting')">Book</button></div>
+                    <div class="item-tag">Senior Home Inspection <button class="book-tag-btn" onclick="quickBook('Home Inspection')">Book</button></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= ABOUT PAGE ================= -->
+    <div id="page-about" class="page-content">
+        <section class="about-section">
+            <h2 class="section-title">About Mushkil Aasan</h2>
+            <p style="text-align: center; max-width: 800px; margin: 0 auto 40px; font-size: 18px; color: var(--text-light);">
+                We aim to simplify local lifestyle challenges. Mushkil Aasan functions as a comprehensive execution agency matching verified specialized labor, educators, housekeepers, and technological administrative professionals to your specifications.
+            </p>
+            <div style="display:flex; flex-wrap:wrap; gap:30px; margin-top:40px; align-items:center;">
+                <div style="flex:1; min-width:300px;">
+                    <img src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=600&q=80" alt="Team Work" style="width:100%; border-radius:10px; box-shadow:0 5px 15px rgba(0,0,0,0.1);">
+                </div>
+                <div style="flex:1; min-width:300px;">
+                    <h3 style="color:var(--primary); margin-bottom:15px; font-size:24px;">Our Operating Core Value</h3>
+                    <p style="margin-bottom:15px; color:var(--text-light);">We understand how tough it can be to secure reliable handymen, reliable domestic workers, or immediate digital document processing. We centralize solutions to guarantee consistency, accountability, and fair pricing models.</p>
+                    <ul style="list-style:none; padding-left:5px;">
+                        <li style="margin-bottom:10px;"><i class="fas fa-check-circle" style="color:var(--secondary);"></i> Strict Identity Validation Assurances</li>
+                        <li style="margin-bottom:10px;"><i class="fas fa-check-circle" style="color:var(--secondary);"></i> Consistent Skill-Upgrading Evaluation Panels</li>
+                        <li style="margin-bottom:10px;"><i class="fas fa-check-circle" style="color:var(--secondary);"></i> Customer Centric Redressal Networks</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- ================= CONTACT PAGE ================= -->
+    <div id="page-contact" class="page-content">
+        <section class="contact-section">
+            <h2 class="section-title">Get In Touch Immediately</h2>
+            <p style="text-align:center; margin-bottom:40px; color:var(--text-light)">Reach out directly via line calls, text alerts, or electronic mail coordinates listed below.</p>
+            
+            <div class="info-box-grid">
+                <div class="info-box">
+                    <i class="fas fa-phone-alt"></i>
+                    <h3>Phone Network</h3>
+                    <p style="margin-top:10px; font-size:18px; font-weight:700; color:var(--primary)"><a href="tel:7439365752" style="text-decoration:none; color:inherit;">+91 7439365752</a></p>
+                </div>
+                <div class="info-box">
+                    <i class="fas fa-envelope-open-text"></i>
+                    <h3>Email Address</h3>
+                    <p style="margin-top:10px; font-size:16px; font-weight:700; color:var(--primary)"><a href="mailto:purabsingharoy90@gmail.com" style="text-decoration:none; color:inherit;">purabsingharoy90@gmail.com</a></p>
+                </div>
+                <div class="info-box">
+                    <i class="fas fa-map-marked-alt"></i>
+                    <h3>Operation Base Zone</h3>
+                    <p style="margin-top:10px; color:var(--text-light)">Providing doorstep services across your local area.</p>
+                </div>
+            </div>
+
+            <div style="margin-top:60px; background:var(--white); padding:40px; border-radius:12px; box-shadow:0 4px 15px rgba(0,0,0,0.05);">
+                <h3 style="margin-bottom:20px; text-align:center; color:var(--primary)">Send an Instant Enquiry Notice</h3>
+                <form id="contactForm" onsubmit="handleContactSubmit(event)">
+                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-bottom:20px;">
+                        <input type="text" placeholder="Full Name" required style="padding:12px; border:1px solid #cbd5e0; border-radius:6px;">
+                        <input type="tel" placeholder="Phone Number" required style="padding:12px; border:1px solid #cbd5e0; border-radius:6px;">
+                    </div>
+                    <textarea placeholder="Write details about your requirements here..." rows="5" required style="width:100%; padding:12px; border:1px solid #cbd5e0; border-radius:6px; margin-bottom:20px; font-family:inherit;"></textarea>
+                    <button type="submit" class="submit-btn">Send Message</button>
+                </form>
+            </div>
+        </section>
+    </div>
+
+    <!-- ================= BOOK NOW CONTEXT PAGE ================= -->
+    <div id="page-book" class="page-content">
+        <div class="booking-card">
+            <h2 style="color:var(--primary); margin-bottom:10px; text-align:center;"><i class="far fa-calendar-check"></i> Secure Your Service Slot</h2>
+            <p style="text-align:center; color:var(--text-light); margin-bottom:30px;">Fill out the details below, and our agent will coordinate with you shortly.</p>
+            
+            <form id="bookingForm" onsubmit="handleBookingSubmit(event)">
+                <div class="form-group">
+                    <label for="b-name">Your Full Name</label>
+                    <input type="text" id="b-name" required placeholder="John Doe">
+                </div>
+                <div class="form-group">
+                    <label for="b-phone">Contact Phone Number</label>
+                    <input type="tel" id="b-phone" required placeholder="7439365752">
+                </div>
+                <div class="form-group">
+                    <label for="b-service">Select Required Service Category</label>
+                    <select id="b-service" required>
+                        <option value="">-- Choose an Option --</option>
+                        <option value="Electrician Services">🏠 Home Maintenance & Repair</option>
+                        <option value="AC Service">❄️ Appliance Installation & Servicing</option>
+                        <option value="Deep Home Cleaning">🧹 Cleaning & Deep Housekeeping</option>
+                        <option value="Domestic Help Staff">👨‍🍳 Domestic Helper / Cook / Caregiver</option>
+                        <option value="Academic Tutor">🎓 Education & Tutors</option>
+                        <option value="Digital Desk Services">💻 Digital & Online Applications</option>
+                        <option value="Outdoor Logistics">🌿 Logistics & Security Setup</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="b-notes">Specific Service / Requirement Details</label>
+                    <textarea id="b-notes" rows="3" placeholder="Example: Fan installation or cleaning requirements..."></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Confirm Service Order Booking</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Universal Footer Frame -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h3 style="color:var(--white); font-size:22px; font-weight:800;">Mushkil Aasan</h3>
+                <p style="margin-top:15px; font-size:14px;">Bridging verified technical expertise and household support teams directly to consumers seamlessly.</p>
+            </div>
+            <div class="footer-col">
+                <h3>Our Services</h3>
+                <ul>
+                    <li><a onclick="navigateTo('services')">Home Repair Matrix</a></li>
+                    <li><a onclick="navigateTo('services')">Deep Cleaning Sweeps</a></li>
+                    <li><a onclick="navigateTo('services')">Domestic Helpers & Cooks</a></li>
+                    <li><a onclick="navigateTo('services')">Digital Form Assistance</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Contact Desk Channels</h3>
+                <p style="font-size:14px; margin-bottom:8px;"><i class="fas fa-phone"></i> Hotline: +91 7439365752</p>
+                <p style="font-size:14px;"><i class="fas fa-envelope"></i> Email: purabsingharoy90@gmail.com</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Mushkil Aasan. All Rights Reserved. Designed for Maximum Accessibility.</p>
+        </div>
+    </footer>
+
+    <!-- INTERACTIVE SPA SCRIPT FRAMEWORK -->
+    <script>
+        // Single Page Navigation Controller Logic
+        function navigateTo(pageId) {
+            // Hide all active content blocks safely
+            const pages = document.querySelectorAll('.page-content');
+            pages.forEach(page => {
+                page.classList.remove('active-page');
+            });
+
+            // Deactivate all navbar link markers
+            const links = document.querySelectorAll('.nav-links a');
+            links.forEach(link => {
+                link.classList.remove('active');
+            });
+
+            // Activate specific targeted content view
+            const targetPage = document.getElementById(`page-${pageId}`);
+            if(targetPage) {
+                targetPage.classList.add('active-page');
+                window.scrollTo(0,0);
+            }
+
+            // Highlight chosen menu anchor element
+            const activeLink = document.getElementById(`link-${pageId}`);
+            if(activeLink) {
+                activeLink.classList.add('active');
+            }
+        }
+
+        // Automatic booking system triggers from service listings
+        function quickBook(serviceName) {
+            navigateTo('book');
+            const noteArea = document.getElementById('b-notes');
+            if(noteArea) {
+                noteArea.value = `Interested in Booking Request: ${serviceName}. Please call me back.`;
+            }
+        }
+
+        // Alert Toast Popup Factory System
+        function triggerToast(message) {
+            const toast = document.getElementById('toast-notification');
+            const toastText = document.getElementById('toast-text');
+            toastText.innerText = message;
+            toast.classList.add('show');
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 4000);
+        }
+
+        // Form Submission Event Handlers
+        function handleBookingSubmit(e) {
+            e.preventDefault();
+            triggerToast("🎉 Booking Registered! Our representative will call you soon.");
+            document.getElementById('bookingForm').reset();
+            setTimeout(() => { navigateTo('home'); }, 2000);
+        }
+
+        function handleContactSubmit(e) {
+            e.preventDefault();
+            triggerToast("✉️ Message Sent! Thank you for contacting Mushkil Aasan.");
+            document.getElementById('contactForm').reset();
+            setTimeout(() => { navigateTo('home'); }, 2000);
+        }
+    </script>
+</body>
+</html>
